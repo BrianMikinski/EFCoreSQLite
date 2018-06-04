@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace EFCoreSQLite
 {
@@ -14,6 +15,7 @@ namespace EFCoreSQLite
             };
         }
 
+        [Key]
         public Guid Id { get; private set; }
 
         public string Name { get; private set; }
