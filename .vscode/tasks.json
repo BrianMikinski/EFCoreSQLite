@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/EFCoreSQLite/EFCoreSQLite.csproj"
+                "${workspaceFolder}/src/EFCoreSQLite.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

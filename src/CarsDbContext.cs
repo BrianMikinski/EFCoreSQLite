@@ -7,10 +7,13 @@ namespace EFCoreSQLite
 {
     public class CarsDbContext : DbContext
     {
-        public DbSet<Car> Cars { get; set; }
+        public virtual DbSet<Car> Cars { get; set; }
 
-        public DbSet<Garage> Garages { get; set; }
+        public virtual DbSet<Garage> Garages { get; set; }
 
-
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlite("Filename=./cars.sqlite");
+        }
     }
 }
