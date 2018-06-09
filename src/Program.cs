@@ -15,8 +15,13 @@ namespace EFCoreSQLite
             dbContext.Garages.Add(garage);
             dbContext.SaveChanges();
 
-            var porsche = Car.CreateNew("911", "porsche", garage.Id);
-            
+            var porsche = Car.CreateNew("911", "Porsche", garage.Id);
+            var mercedes = Car.CreateNew("S-Class Coupe", "Mercedes", garage.Id);
+
+            dbContext.Cars.Add(porsche);
+            dbContext.Cars.Add(mercedes);
+
+            dbContext.SaveChanges();
         }
     }
 }

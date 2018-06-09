@@ -20,73 +20,22 @@ namespace EFCoreSQLite
         {
             modelBuilder.Entity<Car>()
             .HasKey(p => p.Id);
+            
+            modelBuilder.Entity<Car>()
+            .Property(p => p.Id)
+            .ValueGeneratedOnAdd();
 
             modelBuilder.Entity<Car>()
-            .HasOne(p => p.Garage);
+            .HasOne(p => p.Garage)
+            .WithMany(p => p.Cars)
+            .HasForeignKey(p => p.GarageId);
 
             modelBuilder.Entity<Garage>()
             .HasKey(p => p.Id);
 
             modelBuilder.Entity<Garage>()
-            .HasKey(p => p.Id);
-
-            modelBuilder.Entity<Garage>()
-            .HasMany(p => p.Cars);
+            .Property(p => p.Id)
+            .ValueGeneratedOnAdd();
         }
-
-        //     private void ConfigureCategories(ModelBuilder modelBuilder)
-        //     {
-        //         modelBuilder.Entity<Category>()
-        //             .HasKey(p => p.Id);
-
-        //         modelBuilder.Entity<Category>()
-        //             .ToTable("Category")
-        //             .HasMany(e => e.Posts)
-        //             .WithOne(e => e.Category)
-        //             .HasForeignKey(e => e.CategoryId)
-        //             .OnDelete(DeleteBehavior.Cascade);
-        //     }
-
-        //     private void ConfigurePosts(ModelBuilder modelBuilder)
-        //     {
-        //         modelBuilder.Entity<Post>()
-        //             .ToTable("Post");
-
-        //         modelBuilder.Entity<Post>()
-        //             .Ignore(p => p.Tags);
-
-        //         modelBuilder.Entity<Post>()
-        //             .HasKey(p => p.Id);
-        //     }
-
-        //     private void ConfigurePostTags(ModelBuilder modelBuilder)
-        //     {
-        //         modelBuilder.Entity<PostTagMap>()
-        //         .HasKey(p => new { p.Post_id, p.Tag_id });
-
-        //         modelBuilder.Entity<PostTagMap>()
-        //             .ToTable("PostTagMap")
-        //             .HasOne(p => p.Post)
-        //             .WithMany(p => p.PostTags)
-        //             .HasForeignKey(p => p.Post_id);
-
-        //         modelBuilder.Entity<PostTagMap>()
-        //             .HasOne(p => p.Tag)
-        //             .WithMany(p => p.PostTags)
-        //             .HasForeignKey(p => p.Tag_id);
-        //     }
-
-        //     private void ConfigureTags(ModelBuilder modelBuilder)
-        //     {
-        //         modelBuilder.Entity<Tag>()
-        //             .ToTable("Tag");
-
-        //         modelBuilder.Entity<Tag>()
-        //             .Ignore(p => p.Posts);
-
-        //         modelBuilder.Entity<Tag>()
-        //             .HasKey(p => p.Id);
-        //     }
-        // }
     }
 }

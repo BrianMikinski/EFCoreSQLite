@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EFCoreSQLite.Migrations
 {
@@ -11,7 +10,8 @@ namespace EFCoreSQLite.Migrations
                 name: "Garages",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(nullable: true),
                     Location = table.Column<string>(nullable: true)
                 },
@@ -24,27 +24,27 @@ namespace EFCoreSQLite.Migrations
                 name: "Cars",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     Make = table.Column<string>(nullable: true),
                     Model = table.Column<string>(nullable: true),
-                    LocationId = table.Column<Guid>(nullable: true)
+                    GarageId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cars", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Cars_Garages_LocationId",
-                        column: x => x.LocationId,
+                        name: "FK_Cars_Garages_GarageId",
+                        column: x => x.GarageId,
                         principalTable: "Garages",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cars_LocationId",
+                name: "IX_Cars_GarageId",
                 table: "Cars",
-                column: "LocationId");
+                column: "GarageId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
